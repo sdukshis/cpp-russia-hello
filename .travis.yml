@@ -1,3 +1,4 @@
+dist: trusty
 language: cpp
 
 script:
@@ -35,7 +36,7 @@ matrix:
     - addons:
         apt:
           sources:
-          - llvm-toolchain-precise
+          - llvm-toolchain-trusty-3.9
           packages:
           - clang-3.9
       env:

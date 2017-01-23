@@ -40,6 +40,6 @@ matrix:
           - llvm-toolchain-trusty-3.9
           packages:
           - clang-3.9
-          - libstdc++6
+          - g++-6
       env:
         - CMAKE_CXX_COMPILER=clang++-3.9

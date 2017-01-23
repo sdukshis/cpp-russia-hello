@@ -2,13 +2,33 @@ language: cpp
 
 script:
   - mkdir build && cd build
-  - cmake .. -DCMAKE_CXX_COMPILER=g++-6
+  - cmake .. -DCMAKE_CXX_COMPILER=$CMAKE_CXX_COMPILER
   - cmake --build .
   - ./hello
 
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-6
+matrix:
+  include:
+    - addons:
+        apt:
+          sources:
+          - ubuntu-toolchain-r-test
+          packages:
+          - g++-5
+      env:
+        - CMAKE_CXX_COMPILER=g++-5
+    - addons:
+        apt:
+          sources:
+          - ubuntu-toolchain-r-test
+          packages:
+          - g++-6
+      env:
+        - CMAKE_CXX_COMPILER=g++-6
+    - addons:
+        apt:
+          sources:
+          - ubuntu-toolchain-r-test
+          packages:
+          - g++-7
+      env:
+        - CMAKE_CXX_COMPILER=g++-7

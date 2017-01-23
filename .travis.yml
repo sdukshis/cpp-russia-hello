@@ -35,16 +35,8 @@ matrix:
     - addons:
         apt:
           sources:
-          - llvm-toolchain-precise-3.9
+          - llvm-toolchain-precise
           packages:
           - clang-3.9
       env:
         - CMAKE_CXX_COMPILER=clang++-3.9
-    - addons:
-        apt:
-          sources:
-          - llvm-toolchain-precise-4.0
-          packages:
-          - clang-4
-      env:
-        - CMAKE_CXX_COMPILER=clang++-4.0

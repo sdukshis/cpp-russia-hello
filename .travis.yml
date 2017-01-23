@@ -36,8 +36,10 @@ matrix:
     - addons:
         apt:
           sources:
+          - ubuntu-toolchain-r-test
           - llvm-toolchain-trusty-3.9
           packages:
           - clang-3.9
+          - libstdc++6
       env:
         - CMAKE_CXX_COMPILER=clang++-3.9

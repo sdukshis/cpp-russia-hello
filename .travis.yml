@@ -10,9 +10,13 @@ script:
 env:
   - BUILD_TYPE=Release
   - BUILD_TYPE=Debug
+
+env:
   - CMAKE_CXX_COMPILER=g++-4.9
   - CMAKE_CXX_COMPILER=g++-5
   - CMAKE_CXX_COMPILER=g++-6
+  - CMAKE_CXX_COMPILER=clang++-3.9
+  - CMAKE_CXX_COMPILER=clang++-4.0
 
 # matrix:
 #   include:

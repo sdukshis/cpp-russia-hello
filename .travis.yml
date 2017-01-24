@@ -7,9 +7,6 @@ script:
   - cmake -C $BUILD_TYPE --build .
   - ./hello
 
-env:
-  - BUILD_TYPE=Release
-  - BUILD_TYPE=Debug
 matrix:
   include:
     - addons:
@@ -20,6 +17,8 @@ matrix:
           - g++-4.9
       env:
         - CMAKE_CXX_COMPILER=g++-4.9
+        - BUILD_TYPE=Release
+        - BUILD_TYPE=Debug
     - addons:
         apt:
           sources:

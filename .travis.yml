@@ -3,10 +3,13 @@ language: cpp
 
 script:
   - mkdir build && cd build
-  - cmake .. -DCMAKE_CXX_COMPILER=$CMAKE_CXX_COMPILER
-  - cmake --build .
+  - cmake .. -DCMAKE_CXX_COMPILER=$CMAKE_CXX_COMPILER -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+  - cmake -C $BUILD_TYPE --build .
   - ./hello
 
+env:
+  - BUILD_TYPE=Release
+  - BUILD_TYPE=Debug
 matrix:
   include:
     - addons:

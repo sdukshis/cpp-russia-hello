@@ -1,0 +1,31 @@
+build:
+
+build_script:
+  - mkdir build && cd build
+  - cmake -G "Visual Studio %TOOLCHAIN_VERSION% Win64" ..
+  - cmake --build . --config %BUILD_TYPE% 
+
+test_script:
+  - cmd: "%BUILD_TYPE%\\hello"
+
+environment:
+  PYTHON: "C:\\Python27"
+  PYTHON_VERSION: "2.7.8"
+  PYTHON_ARCH: "32"
+  matrix:
+    - TOOLCHAIN_VERSION: 14
+      BUILD_TYPE: Release
+    - TOOLCHAIN_VERSION: 12
+      BUILD_TYPE: Release
+    - TOOLCHAIN_VERSION: 11
+      BUILD_TYPE: Release
+    - TOOLCHAIN_VERSION: 10
+      BUILD_TYPE: Release
+    - TOOLCHAIN_VERSION: 14
+      BUILD_TYPE: Debug
+    - TOOLCHAIN_VERSION: 12
+      BUILD_TYPE: Debug
+    - TOOLCHAIN_VERSION: 11
+      BUILD_TYPE: Debug
+    - TOOLCHAIN_VERSION: 10
+      BUILD_TYPE: Debug

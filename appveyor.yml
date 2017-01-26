@@ -6,7 +6,7 @@ build_script:
   - cmake --build . --config %BUILD_TYPE% 
 
 test_script:
-- cmd: %BUILD_TYPE%\hello
+  - cmd: "%BUILD_TYPE%\hello"
 
 environment:
   PYTHON: "C:\\Python27"
@@ -25,7 +25,7 @@ environment:
       BUILD_TYPE: Debug
     - TOOLCHAIN_VERSION: 12
       BUILD_TYPE: Debug
-    - TOOLCHAIN_VERSION: 11
+    - TOOLCHAIN_VERSION: 1
       BUILD_TYPE: Debug
     - TOOLCHAIN_VERSION: 10
       BUILD_TYPE: Debug

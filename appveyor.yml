@@ -6,7 +6,7 @@ build_script:
   - cmake --build . --config %BUILD_TYPE% 
 
 test_script:
-  - cmd: ctest
+  - cmd: ctest -C %BUILD_TYPE% 
 
 environment:
   PYTHON: "C:\\Python27"

@@ -1,11 +1,16 @@
 dist: trusty
 language: cpp
 
+install:
+  - ./.travis/install.sh
+
 script:
+  - ./.travis/activate.sh
   - mkdir build && cd build
+  - conan install .. --build=missing
   - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_CXX_COMPILER=$COMPILER
   - cmake --build . -- VERBOSE=1
-  - ctest
+  - ctest -V
 
 
 env:

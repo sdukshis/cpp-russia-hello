@@ -8,7 +8,10 @@ set(${PROJECT_NAME}_SRC
 
 add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_SRC})
 
-target_link_libraries(${PROJECT_NAME} hello)
+target_link_libraries(${PROJECT_NAME}
+	hello
+	${CONAN_LIBS}
+)
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 14)
 

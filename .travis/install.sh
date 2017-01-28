@@ -19,6 +19,11 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
     pyenv activate conan
 fi
 
+if [[ "$(uname -s)" == 'Linux' ]]; then
+    export CC=$C_COMPILER
+    export CXX=$CXX_COMPILER
+fi
+
 pip install conan
 
 conan user

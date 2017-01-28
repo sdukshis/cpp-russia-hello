@@ -17,6 +17,9 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
     pyenv virtualenv 2.7.10 conan
     pyenv rehash
     pyenv activate conan
+    
+    CC="clang"
+    CXX="clang++"
 fi
 
 if [[ "$(uname -s)" == 'Linux' ]]; then

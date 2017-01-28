@@ -20,8 +20,8 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
 fi
 
 if [[ "$(uname -s)" == 'Linux' ]]; then
-    export CC=$C_COMPILER
-    export CXX=$CXX_COMPILER
+    CC=$C_COMPILER
+    CXX=$CXX_COMPILER
 fi
 
 pip install conan

@@ -7,7 +7,7 @@ install:
 script:
   - ./.travis/activate.sh
   - mkdir build && cd build
-  - conan install .. -e CXX=$COMPILER -s build_type=$BUILD_TYPE --build=missing
+  - conan install .. -s build_type=$BUILD_TYPE --build=missing
   - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_CXX_COMPILER=$COMPILER
   - cmake --build . -- VERBOSE=1
   - ctest -V

@@ -20,4 +20,4 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
 fi
 
 pip install conan
-CXX=$COMPILER conan user
+CC=$COMPILER CXX=$COMPILER conan user

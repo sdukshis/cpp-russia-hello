@@ -8,22 +8,22 @@ script:
   - ./.travis/activate.sh
   - mkdir build && cd build
   - conan install .. -s build_type=$BUILD_TYPE --build=missing
-  - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_CXX_COMPILER=$COMPILER
+  - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_C_COMPILER=$C_COMPILER -DCMAKE_CXX_COMPILER=$COMPILER
   - cmake --build . -- VERBOSE=1
   - ctest -V
 
 
 env:
-  - BUILD_TYPE=Release COMPILER=g++-4.9
-  - BUILD_TYPE=Release COMPILER=g++-5
-  - BUILD_TYPE=Release COMPILER=g++-6
-  - BUILD_TYPE=Release COMPILER=clang++-3.9
-  - BUILD_TYPE=Release COMPILER=clang++-4.0
-  - BUILD_TYPE=Debug COMPILER=g++-4.9
-  - BUILD_TYPE=Debug COMPILER=g++-5
-  - BUILD_TYPE=Debug COMPILER=g++-6
-  - BUILD_TYPE=Debug COMPILER=clang++-3.9
-  - BUILD_TYPE=Debug COMPILER=clang++-4.0
+  - BUILD_TYPE=Release C_COMPILER=gcc-4.9 CXX_COMPILER=g++-4.9
+  - BUILD_TYPE=Release C_COMPILER=gcc-5 CXX_COMPILER=g++-5
+  - BUILD_TYPE=Release C_COMPILER=gcc-6 CXX_COMPILER=g++-6
+  - BUILD_TYPE=Release C_COMPILER=gcc-3.9 CXX_COMPILER=clang++-3.9
+  - BUILD_TYPE=Release C_COMPILER=gcc-4.0 CXX_COMPILER=clang++-4.0
+  - BUILD_TYPE=Debug C_COMPILER=gcc-4.9 CXX_COMPILER=g++-4.9
+  - BUILD_TYPE=Debug C_COMPILER=gcc-5 CXX_COMPILER=g++-5
+  - BUILD_TYPE=Debug C_COMPILER=gcc-6 CXX_COMPILER=g++-6
+  - BUILD_TYPE=Debug C_COMPILER=gcc-3.9 CXX_COMPILER=clang++-3.9
+  - BUILD_TYPE=Debug C_COMPILER=gcc-4.0 CXX_COMPILER=clang++-4.0
 
 
 addons:

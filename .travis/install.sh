@@ -21,4 +21,4 @@ fi
 
 pip install conan
 
-CC=$C_COMPILER CXX=$CXX_COMPILER conan user
+conan user

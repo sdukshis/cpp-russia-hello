@@ -18,7 +18,7 @@ class HelloReuseConan(ConanFile):
         # For following issue https://github.com/conan-io/conan/issues/475
         if (self.settings.compiler == "Visual Studio" and
             self.settings.build_type == "Debug" and
-                not self.settings["compiler.runtime"].endswith("d")):
+                not self.settings.compiler.runtime.value.endswith("d")):
             settings.compiler.runtime += "d"
         self.run("cmake --build . %s" % cmake.build_config)
 

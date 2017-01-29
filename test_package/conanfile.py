@@ -13,13 +13,14 @@ class HelloReuseConan(ConanFile):
     default_options = "gtest:shared=False"
 
     def build(self):
-        cmake = CMake(self.settings)
-        self.run('cmake "%s" %s' % (self.conanfile_directory, cmake.command_line))
         # For following issue https://github.com/conan-io/conan/issues/475
         if (self.settings.compiler == "Visual Studio" and
             self.settings.build_type == "Debug" and
                 not self.settings.compiler.runtime.value.endswith("d")):
             self.settings.compiler.runtime.value += "d"
+
+        cmake = CMake(self.settings)
+        self.run('cmake "%s" %s' % (self.conanfile_directory, cmake.command_line))
         self.run("cmake --build . %s" % cmake.build_config)
 
     def test(self):

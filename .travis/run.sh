@@ -15,4 +15,4 @@ if [[ "$(uname -s)" == 'Linux' ]]; then
     CXX=$CXX_COMPILER
 fi
 
-conan test_package .. -s build_type=$BUILD_TYPE --build=missing
+conan test_package -s build_type=$BUILD_TYPE --build=missing

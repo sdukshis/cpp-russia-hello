@@ -1,12 +1,17 @@
 build:
 
-build_script:
+install:
+  - set PATH=%PATH%;%PYTHON%/Scripts/
+  - pip.exe install conan
   - mkdir build && cd build
+  - conan install .. --build=missing -s build_type=%BUILD_TYPE% -s compiler="Visual Studio" -s compiler.version=%TOOLCHAIN_VERSION%
+
+build_script:
   - cmake -G "Visual Studio %TOOLCHAIN_VERSION% Win64" ..
   - cmake --build . --config %BUILD_TYPE% 
 
 test_script:
-  - cmd: "%BUILD_TYPE%\\hello"
+  - cmd: ctest -V -C %BUILD_TYPE% 
 
 environment:
   PYTHON: "C:\\Python27"
@@ -17,15 +22,11 @@ environment:
       BUILD_TYPE: Release
     - TOOLCHAIN_VERSION: 12
       BUILD_TYPE: Release
-    - TOOLCHAIN_VERSION: 11
-      BUILD_TYPE: Release
     - TOOLCHAIN_VERSION: 10
       BUILD_TYPE: Release
     - TOOLCHAIN_VERSION: 14
       BUILD_TYPE: Debug
     - TOOLCHAIN_VERSION: 12
-      BUILD_TYPE: Debug
-    - TOOLCHAIN_VERSION: 11
       BUILD_TYPE: Debug
     - TOOLCHAIN_VERSION: 10
       BUILD_TYPE: Debug

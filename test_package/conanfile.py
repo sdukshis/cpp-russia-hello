@@ -15,11 +15,12 @@ class HelloReuseConan(ConanFile):
     def build(self):
         cmake = CMake(self.settings)
         self.run('cmake "%s" %s' % (self.conanfile_directory, cmake.command_line))
+        # For following issue https://github.com/conan-io/conan/issues/475
         if (self.settings.compiler == "Visual Studio" and
-                self.settings.build_type):
-            self.run("cmake --build . --config %s" % self.settings.build_type)
-        else:
-            self.run("cmake --build .")
+            self.settings.build_type == "Debug" and
+                not self.settings.compiler.runtime.endswith("d")):
+            settings.compiler.runtime += "d"
+        self.run("cmake --build . %s" % cmake.build_config)
 
     def test(self):
         # equal to ./bin/greet, but portable win: .\bin\greet

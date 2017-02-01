@@ -7,6 +7,10 @@ install:
 script:
   - ./.travis/run.sh
 
+after_script:
+  - conan user filonovpv -p $CONAN_PASSWORD -r conan.io
+  - conan copy hello/0.1@demo/testing filonovpv/testing --all
+  - conan upload hello/0.1@filonovpv/testing --all -r conan.io
 
 env:
   - BUILD_TYPE=Release C_COMPILER=gcc-4.9 CXX_COMPILER=g++-4.9

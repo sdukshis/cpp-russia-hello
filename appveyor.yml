@@ -7,6 +7,11 @@ install:
 build_script:
   - conan test_package --build=missing -s build_type=%BUILD_TYPE% -s compiler="Visual Studio" -s compiler.version=%TOOLCHAIN_VERSION%
 
+on_success:
+  - conan user filonovpv -p %CONAN_PASSWORD% -r conan.io
+  - conan copy hello/0.1@demo/testing filonovpv/testing --all
+  - conan upload hello/0.1@filonovpv/testing -r conan.io --all
+
 environment:
   PYTHON: "C:\\Python27"
   PYTHON_VERSION: "2.7.8"

@@ -3,6 +3,9 @@ stages:
 
 gcc-5:
   stage: build
+  variables:
+    CC: gcc-5
+    CXX: g++-5
   script:
     - apt update && apt install -y g++-5 cmake python-pip
     - pip install conan
@@ -13,6 +16,9 @@ gcc-5:
 
 gcc-4.9:
   stage: build
+  variables:
+    CC: gcc-4.9
+    CXX: g++-4.9
   script:
     - apt update && apt install -y g++-4.9 cmake python-pip
     - pip install conan

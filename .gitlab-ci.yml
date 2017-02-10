@@ -32,7 +32,7 @@ gcc-6:
 
 clang-3.9:
   stage: build
-  image: purplekarrot/clang-3.9
+  image: walberla/buildenv-ubuntu-clang:3.9
   script:
     - conan test_package --build=missing
   tags:

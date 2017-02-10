@@ -1,5 +1,5 @@
 before_script:
-  - apt update && apt install g++-6 cmake python-pip
+  - apt update && apt install g++-5 cmake python-pip
   - pip install conan
   - conan user
 
@@ -7,7 +7,7 @@ stages:
   - build
   - test
 
-gcc-6:
+gcc-5:
   stage: build
   script:
     - conan test_package --build=missing

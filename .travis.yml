@@ -7,6 +7,8 @@ install:
 script:
   - ./.travis/run.sh
 
+after_script:
+  - ./.travis/upload.sh
 
 env:
   - BUILD_TYPE=Release C_COMPILER=gcc-4.9 CXX_COMPILER=g++-4.9

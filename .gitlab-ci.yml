@@ -1,20 +1,23 @@
+before_script:
+  - apt update && apt install -y cmake python-pip
+  - pip install conan
+  - conan user
+
 stages:
   - build
 
 gcc-4:
   stage: build
   image: gcc:4
+  script:
+    - conan test_package --build=missing
   tags:
     - docker
 
 gcc-5:
   stage: build
   image: gcc:5
+  script:
+    - conan test_package --build=missing
   tags:
     - docker
-
-script:
-  - apt update && apt install -y cmake python-pip
-  - pip install conan
-  - conan user
-  - conan test_package --build=missing

@@ -1,31 +1,24 @@
-build:
+build: false
+environment:
+    PYTHON: "C:\\Python27-x64"
+    PYTHON_VERSION: "2.7.11"
+    PYTHON_ARCH: "64"
 
+    CONAN_UPLOAD: 1
+    CONAN_REFERENCE: "hello/0.1"
+    CONAN_USERNAME: "filonovpv"
+    CONAN_CHANNEL: "testing"
+    CONAN_TOTAL_PAGES: 4
+
+    matrix:
+        - CONAN_CURRENT_PAGE: 1
+        - CONAN_CURRENT_PAGE: 2  
+        - CONAN_CURRENT_PAGE: 3
+        - CONAN_CURRENT_PAGE: 4
 install:
   - set PATH=%PATH%;%PYTHON%/Scripts/
-  - pip.exe install conan
+  - pip.exe install conan_package_tools # It install conan too
+  - conan user # It creates the conan data directory
 
-build_script:
-  - conan test_package --build=missing -s build_type=%BUILD_TYPE% -s compiler="Visual Studio" -s compiler.version=%TOOLCHAIN_VERSION%
-
-on_success:
-  - conan user filonovpv -p %CONAN_PASSWORD% -r conan.io
-  - conan copy hello/0.1@demo/testing filonovpv/testing --all
-  - conan upload hello/0.1@filonovpv/testing -r conan.io --all
-
-environment:
-  PYTHON: "C:\\Python27"
-  PYTHON_VERSION: "2.7.8"
-  PYTHON_ARCH: "32"
-  matrix:
-    - TOOLCHAIN_VERSION: 14
-      BUILD_TYPE: Debug
-    - TOOLCHAIN_VERSION: 12
-      BUILD_TYPE: Debug
-    - TOOLCHAIN_VERSION: 10
-      BUILD_TYPE: Debug
-    - TOOLCHAIN_VERSION: 14
-      BUILD_TYPE: Release
-    - TOOLCHAIN_VERSION: 12
-      BUILD_TYPE: Release
-    - TOOLCHAIN_VERSION: 10
-      BUILD_TYPE: Release
+test_script:
+  - C:\Python27-x64\python build.py

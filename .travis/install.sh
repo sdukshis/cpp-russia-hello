@@ -17,16 +17,8 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
     pyenv virtualenv 2.7.10 conan
     pyenv rehash
     pyenv activate conan
-    
-    CC="clang"
-    CXX="clang++"
 fi
 
-if [[ "$(uname -s)" == 'Linux' ]]; then
-    CC=$C_COMPILER
-    CXX=$CXX_COMPILER
-fi
-
-pip install conan
+pip install conan_package_tools
 
 conan user

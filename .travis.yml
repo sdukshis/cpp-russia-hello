@@ -1,66 +1,47 @@
-dist: trusty
-language: cpp
+os: linux
+services:
+   - docker
+sudo: required
+language: python
+env:
+  global:
+    - CONAN_UPLOAD=1
+    - CONAN_REFERENCE="hello/0.1"
+    - CONAN_USERNAME="filonovpv"
+    - CONAN_CHANNEL="testing"
+    - CONAN_TOTAL_PAGES=1
+    - CONAN_CURRENT_PAGE=1
+
+  matrix:
+    - CONAN_GCC_VERSIONS=4.6 CONAN_USE_DOCKER=1
+    - CONAN_GCC_VERSIONS=4.8 CONAN_USE_DOCKER=1
+    - CONAN_GCC_VERSIONS=4.9 CONAN_USE_DOCKER=1 
+    - CONAN_GCC_VERSIONS=5.2 CONAN_USE_DOCKER=1
+    - CONAN_GCC_VERSIONS=5.3 CONAN_USE_DOCKER=1
+matrix:
+   include:
+       - os: osx 
+         osx_image: xcode8.0 # apple-clang 8.0
+         language: generic
+         env:
+       - os: osx 
+         osx_image: xcode7.3 # apple-clang 7.3
+         language: generic
+         env:
+       - os: osx 
+         osx_image: xcode7.1 # apple-clang 7.0
+         language: generic
+         env:
+       - os: osx
+         osx_image: xcode6.4 # apple-clang 6.1
+         language: generic
+         env:
+       - os: osx 
+         osx_image: xcode6.2 # apple-clang 6.0
+         language: generic
+         env:
 
 install:
   - ./.travis/install.sh
-
 script:
-  - ./.travis/run.sh
-
-after_script:
-  - ./.travis/upload.sh
-
-env:
-  - BUILD_TYPE=Release C_COMPILER=gcc-4.9 CXX_COMPILER=g++-4.9
-  - BUILD_TYPE=Release C_COMPILER=gcc-5 CXX_COMPILER=g++-5
-  - BUILD_TYPE=Release C_COMPILER=gcc-6 CXX_COMPILER=g++-6
-  - BUILD_TYPE=Release C_COMPILER=clang-3.9 CXX_COMPILER=clang++-3.9
-  # - BUILD_TYPE=Release C_COMPILER=clang-4.0 CXX_COMPILER=clang++-4.0
-  - BUILD_TYPE=Debug C_COMPILER=gcc-4.9 CXX_COMPILER=g++-4.9
-  - BUILD_TYPE=Debug C_COMPILER=gcc-5 CXX_COMPILER=g++-5
-  - BUILD_TYPE=Debug C_COMPILER=gcc-6 CXX_COMPILER=g++-6
-  - BUILD_TYPE=Debug C_COMPILER=clang-3.9 CXX_COMPILER=clang++-3.9
-  # - BUILD_TYPE=Debug C_COMPILER=clang-4.0 CXX_COMPILER=clang++-4.0
-
-
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-      - llvm-toolchain-trusty-3.9
-      - llvm-toolchain-trusty-4.0
-    packages:
-      - g++-4.9
-      - g++-5
-      - g++-6
-      - clang-3.9
-      - clang-4.0
-
-matrix:
-  include:
-    - os: osx
-      osx_image: xcode6.4
-      env: BUILD_TYPE=Debug
-    - os: osx
-      osx_image: xcode7.3
-      env: BUILD_TYPE=Debug
-    - os: osx
-      osx_image: xcode8
-      env: BUILD_TYPE=Debug
-    - os: osx
-      osx_image: xcode8.2
-      env: BUILD_TYPE=Debug
-    - os: osx
-      osx_image: xcode6.4
-      env: BUILD_TYPE=Release
-    - os: osx
-      osx_image: xcode7.3
-      env: BUILD_TYPE=Release
-    - os: osx
-      osx_image: xcode8
-      env: BUILD_TYPE=Release
-    - os: osx
-      osx_image: xcode8.2
-      env: BUILD_TYPE=Release
-
-
+- ./.travis/run.sh

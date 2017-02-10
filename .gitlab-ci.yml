@@ -1,5 +1,5 @@
 before_script:
-  - apt update && apt install g++-5 cmake python-pip
+  - apt update && apt install -y g++-5 cmake python-pip
   - pip install conan
   - conan user
 

@@ -4,7 +4,7 @@ environment:
     PYTHON_VERSION: "2.7.11"
     PYTHON_ARCH: "64"
 
-    CONAN_UPLOAD: 0
+    CONAN_UPLOAD: 1
     CONAN_REFERENCE: "hello/0.1"
     CONAN_USERNAME: "filonovpv"
     CONAN_CHANNEL: "testing"

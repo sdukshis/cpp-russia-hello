@@ -1,28 +1,20 @@
 stages:
   - build
 
-gcc-5:
+gcc-4:
   stage: build
-  variables:
-    CC: gcc-5
-    CXX: g++-5
-  script:
-    - apt update && apt install -y g++-5 cmake python-pip
-    - pip install conan
-    - conan user
-    - conan test_package --build=missing
+  image: gcc:4
   tags:
     - docker
 
-gcc-4.9:
+gcc-5:
   stage: build
-  variables:
-    CC: gcc-4.9
-    CXX: g++-4.9
-  script:
-    - apt update && apt install -y g++-4.9 cmake python-pip
-    - pip install conan
-    - conan user
-    - conan test_package --build=missing
+  image: gcc:5
   tags:
     - docker
+
+script:
+  - apt update && apt install -y cmake python-pip
+  - pip install conan
+  - conan user
+  - conan test_package --build=missing

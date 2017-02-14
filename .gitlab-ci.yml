@@ -38,9 +38,9 @@ clang-3.9:
   tags:
     - docker
 
-apple-clang-8.0:
-  stage: build
-  script:
-    - conan test_package --build=missing
-  tags:
-    - osx
+# apple-clang-8.0:
+#   stage: build
+#   script:
+#     - conan test_package --build=missing
+#   tags:
+#     - osx

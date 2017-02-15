@@ -54,7 +54,9 @@ deploy:gcc-4:
     - docker
   script:
     # - cat artifacts/text.txt
-    - conan remote add cpp-russia-ci http://185.185.69.252:9300
+    - hostname
+    - ip a
+    - conan remote add cpp-russia-ci http://cpp-russia-ci3.filonovpv.name:9300
     - conan user -p $CONAN_PASSWORD -r cpp-russia-ci demo
     - conan upload --confirm -r cpp-russia-ci "hello/*" --all
   dependencies:

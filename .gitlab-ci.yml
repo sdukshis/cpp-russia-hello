@@ -17,7 +17,7 @@ build:gcc-4:
     - docker
   artifacts:
     paths:
-      - /root/.conan
+      - /root/.conan/*
 
 # build:gcc-5:
 #   stage: build
@@ -48,6 +48,8 @@ deploy:gcc-4:
   only:
     - feature/2-upload-packages-to-conan
     - master
+  tags:
+    - docker
   script:
     - conan upload -r cpp-russia-ci "hello/*" --all
   dependencies:

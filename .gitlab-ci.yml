@@ -55,6 +55,7 @@ deploy:gcc-4:
   script:
     # - cat artifacts/text.txt
     - conan remote add cpp-russia-ci http://cpp-russia-ci3.filonovpv.name:9300
+    - conan user -p demo -r cpp-russia-ci demo
     - conan upload --confirm -r cpp-russia-ci "hello/*" --all
   dependencies:
     - build:gcc-4

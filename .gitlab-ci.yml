@@ -13,13 +13,13 @@ build:gcc-4:
   image: gcc:4
   script:
     # - conan test_package --build=missing
-    # - mkdir -p /root/.conan
-    - echo "Hello" > text.txt
+    - mkdir -p artifacts
+    - echo "Hello" > artifacts/text.txt
   tags:
     - docker
   artifacts:
     paths:
-      - text.txt
+      - artifacts
 
 # build:gcc-5:
 #   stage: build
@@ -53,7 +53,7 @@ deploy:gcc-4:
   tags:
     - docker
   script:
-    - cat text.txt
+    - cat artifacts/text.txt
     # - conan upload -r cpp-russia-ci "hello/*" --all
   dependencies:
     - build:gcc-4

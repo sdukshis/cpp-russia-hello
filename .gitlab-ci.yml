@@ -11,6 +11,8 @@ stages:
 build:gcc-4:
   stage: build
   image: gcc:4
+  volumes:
+    - /root/.conan:/root/.conan
   script:
     - conan test_package --build=missing
   tags:

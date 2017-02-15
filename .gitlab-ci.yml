@@ -19,7 +19,7 @@ build:gcc-4:
     - docker
   artifacts:
     paths:
-      - .conan
+      - .conan/data/hello
 
 # build:gcc-5:
 #   stage: build
@@ -55,7 +55,7 @@ deploy:gcc-4:
   script:
     # - cat artifacts/text.txt
     - conan remote add cpp-russia-ci http://cpp-russia-ci3.filonovpv.name:9300
-    - conan upload -r cpp-russia-ci "hello/*" --all
+    - conan upload --confirm -r cpp-russia-ci "hello/*" --all
   dependencies:
     - build:gcc-4
 

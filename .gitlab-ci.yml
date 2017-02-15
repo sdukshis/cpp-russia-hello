@@ -47,7 +47,7 @@ build:gcc-4:
 
 deploy:gcc-4:
   stage: deploy
-  image: conan_client
+  image: conan/conan_client
   only:
     - feature/2-upload-packages-to-conan
     - master

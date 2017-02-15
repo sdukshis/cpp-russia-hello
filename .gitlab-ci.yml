@@ -1,8 +1,9 @@
-# before_script:
-#   - apt update && apt install -y cmake python-pip python-dev
-#   - pip install conan
-#   - conan user
-#   - conan remote add cpp-russia-ci http://cpp-russia-ci3.filonovpv.name:9300
+before_script:
+  - apt update && apt install -y cmake python-pip python-dev
+  - pip install conan
+  - export CONAN_USER_HOME=$(pwd)
+  - conan user
+  - conan remote add cpp-russia-ci http://cpp-russia-ci3.filonovpv.name:9300
 
 stages:
   - build
@@ -12,14 +13,14 @@ build:gcc-4:
   stage: build
   image: gcc:4
   script:
-    # - conan test_package --build=missing
-    - mkdir -p artifacts
-    - echo "Hello" > artifacts/text.txt
+    - conan test_package --build=missing
+    # - mkdir -p artifacts
+    # - echo "Hello" > artifacts/text.txt
   tags:
     - docker
   artifacts:
     paths:
-      - artifacts
+      - .conan
 
 # build:gcc-5:
 #   stage: build
@@ -53,8 +54,8 @@ deploy:gcc-4:
   tags:
     - docker
   script:
-    - cat artifacts/text.txt
-    # - conan upload -r cpp-russia-ci "hello/*" --all
+    # - cat artifacts/text.txt
+    - conan upload -r cpp-russia-ci "hello/*" --all
   dependencies:
     - build:gcc-4
 

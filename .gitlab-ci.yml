@@ -3,7 +3,6 @@ before_script:
   - pip install conan
   - export CONAN_USER_HOME=$(pwd)
   - conan user
-  - conan remote add cpp-russia-ci http://cpp-russia-ci3.filonovpv.name:9300
 
 stages:
   - build
@@ -48,6 +47,7 @@ build:gcc-4:
 
 deploy:gcc-4:
   stage: deploy
+  image: conan_client
   only:
     - feature/2-upload-packages-to-conan
     - master
@@ -55,6 +55,7 @@ deploy:gcc-4:
     - docker
   script:
     # - cat artifacts/text.txt
+    - conan remote add cpp-russia-ci http://cpp-russia-ci3.filonovpv.name:9300
     - conan upload -r cpp-russia-ci "hello/*" --all
   dependencies:
     - build:gcc-4

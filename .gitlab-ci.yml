@@ -56,7 +56,6 @@ deploy:
   stage: deploy
   image: python:2.7
   only:
-    - feature/2-upload-packages-to-conan
     - master
   tags:
     - docker

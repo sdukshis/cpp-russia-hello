@@ -1,42 +1,77 @@
 before_script:
   - apt update && apt install -y cmake python-pip python-dev
   - pip install conan
+  - export CONAN_USER_HOME=$(pwd)
   - conan user
 
 stages:
   - build
+  - deploy
 
-gcc-4:
+build:gcc-4:
   stage: build
   image: gcc:4
   script:
     - conan test_package --build=missing
   tags:
     - docker
+  artifacts:
+    paths:
+      - .conan/data/hello
 
-gcc-5:
+build:gcc-5:
   stage: build
   image: gcc:5
   script:
     - conan test_package --build=missing
   tags:
     - docker
+  artifacts:
+    paths:
+      - .conan/data/hello
 
-gcc-6:
+build:gcc-6:
   stage: build
   image: gcc:6
   script:
     - conan test_package --build=missing
   tags:
     - docker
+  artifacts:
+    paths:
+      - .conan/data/hello
 
-clang-3.9:
+build:clang-3.9:
   stage: build
   image: walberla/buildenv-ubuntu-clang:3.9
   script:
     - conan test_package --build=missing
   tags:
     - docker
+  artifacts:
+    paths:
+      - .conan/data/hello
+
+deploy:
+  stage: deploy
+  image: python:2.7
+  only:
+    - master
+  tags:
+    - docker
+  before_script:
+    - pip install conan
+    - export CONAN_USER_HOME=$(pwd)
+    - conan user
+  script:
+    - conan remote add cpp-russia-ci http://cpp-russia-ci3.filonovpv.name:9300
+    - conan user -p $CONAN_PASSWORD -r cpp-russia-ci demo
+    - conan upload --confirm -r cpp-russia-ci "hello/*" --all
+  dependencies:
+    - build:gcc-4
+    - build:gcc-5
+    - build:gcc-6
+    - build:clang-3.9
 
 # apple-clang-8.0:
 #   stage: build

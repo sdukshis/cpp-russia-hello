@@ -64,7 +64,7 @@ deploy:
     - export CONAN_USER_HOME=$(pwd)
     - conan user
   script:
-    - conan remote add sprintbox http://sprintbox.filonovpv.name:9300
+    - conan remote add sprintbox http://185.185.69.25:9300
     - conan user -p $CONAN_PASSWORD -r sprintbox demo
     - conan upload --confirm -r sprintbox "hello/*" --all
   dependencies:

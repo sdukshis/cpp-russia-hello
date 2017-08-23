@@ -8,16 +8,16 @@ stages:
   - build
   - deploy
 
-build:gcc-4:
-  stage: build
-  image: gcc:4
-  script:
-    - conan test_package --build=missing
-  tags:
-    - docker
-  artifacts:
-    paths:
-      - .conan/data/hello
+# build:gcc-4:
+#   stage: build
+#   image: gcc:4
+#   script:
+#     - conan test_package --build=missing
+#   tags:
+#     - docker
+#   artifacts:
+#     paths:
+#       - .conan/data/hello
 
 # build:gcc-5:
 #   stage: build
@@ -59,16 +59,19 @@ deploy:
     - master
   tags:
     - docker
-  before_script:
-    - pip install conan
-    - export CONAN_USER_HOME=$(pwd)
-    - conan user
+  # before_script:
+  #   - pip install conan
+  #   - export CONAN_USER_HOME=$(pwd)
+  #   - conan user
   script:
-    - conan remote add conan-private http://185.185.69.25:9300
-    - conan user -p $CONAN_PASSWORD -r conan-private demo
-    - conan upload --confirm -r conan-private "hello/*" --all
+    - nslookup sprintbox.filonovpv.name
+    - pip install httpie
+    - http http://sprintbox.filonovpv.name:9300
+    # - conan remote add conan-private http://185.185.69.25:9300
+    # - conan user -p $CONAN_PASSWORD -r conan-private demo
+    # - conan upload --confirm -r conan-private "hello/*" --all
   dependencies:
-    - build:gcc-4
+    # - build:gcc-4
     # - build:gcc-5
     # - build:gcc-6
     # - build:clang-3.9

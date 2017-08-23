@@ -64,9 +64,9 @@ deploy:
     - export CONAN_USER_HOME=$(pwd)
     - conan user
   script:
-    - conan remote add cpp-russia-ci http://cpp-russia-ci3.filonovpv.name:9300
-    - conan user -p $CONAN_PASSWORD -r cpp-russia-ci demo
-    - conan upload --confirm -r cpp-russia-ci "hello/*" --all
+    - conan remote add sprintbox http://sprintbox.filonovpv.name:9300
+    - conan user -p $CONAN_PASSWORD -r sprintbox
+    - conan upload --confirm -r sprintbox "hello/*" --all
   dependencies:
     - build:gcc-4
     - build:gcc-5

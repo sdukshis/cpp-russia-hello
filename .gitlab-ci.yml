@@ -65,7 +65,7 @@ deploy:
     - conan user
   script:
     - conan remote add sprintbox http://sprintbox.filonovpv.name:9300
-    - conan user -p $CONAN_PASSWORD -r sprintbox
+    - conan user -p $CONAN_PASSWORD -r sprintbox demo
     - conan upload --confirm -r sprintbox "hello/*" --all
   dependencies:
     - build:gcc-4

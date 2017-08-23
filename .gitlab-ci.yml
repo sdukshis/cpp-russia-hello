@@ -59,17 +59,18 @@ deploy:
     - master
   tags:
     - docker
-  # before_script:
-  #   - pip install conan
-  #   - export CONAN_USER_HOME=$(pwd)
-  #   - conan user
+  before_script:
+    - pip install conan
+    - export CONAN_USER_HOME=$(pwd)
+    - conan user
   script:
     - ping -c 4 sprintbox.filonovpv.name
     - pip install httpie
     - http http://sprintbox.filonovpv.name:9300
-    # - conan remote add conan-private http://185.185.69.25:9300
-    # - conan user -p $CONAN_PASSWORD -r conan-private demo
-    # - conan upload --confirm -r conan-private "hello/*" --all
+    - conan remote add conan-private http://185.185.69.25:9300
+    - conan user -p $CONAN_PASSWORD -r conan-private demo
+    - conan remote list
+    - conan upload --confirm -r conan-private "hello/*" --all
   dependencies:
     # - build:gcc-4
     # - build:gcc-5

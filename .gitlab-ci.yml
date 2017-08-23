@@ -1,56 +1,56 @@
-# before_script:
-#   - apt update && apt install -y cmake python-pip python-dev
-#   - pip install conan
-#   - export CONAN_USER_HOME=$(pwd)
-#   - conan user
+before_script:
+  - apt update && apt install -y cmake python-pip python-dev
+  - pip install conan
+  - export CONAN_USER_HOME=$(pwd)
+  - conan user
 
 stages:
   - build
   - deploy
 
-# build:gcc-4:
-#   stage: build
-#   image: gcc:4
-#   script:
-#     - conan test_package --build=missing
-#   tags:
-#     - docker
-#   artifacts:
-#     paths:
-#       - .conan/data/hello
+build:gcc-4:
+  stage: build
+  image: gcc:4
+  script:
+    - conan test_package --build=missing
+  tags:
+    - docker
+  artifacts:
+    paths:
+      - .conan/data/hello
 
-# build:gcc-5:
-#   stage: build
-#   image: gcc:5
-#   script:
-#     - conan test_package --build=missing
-#   tags:
-#     - docker
-#   artifacts:
-#     paths:
-#       - .conan/data/hello
+build:gcc-5:
+  stage: build
+  image: gcc:5
+  script:
+    - conan test_package --build=missing
+  tags:
+    - docker
+  artifacts:
+    paths:
+      - .conan/data/hello
 
-# build:gcc-6:
-#   stage: build
-#   image: gcc:6
-#   script:
-#     - conan test_package --build=missing
-#   tags:
-#     - docker
-#   artifacts:
-#     paths:
-#       - .conan/data/hello
+build:gcc-6:
+  stage: build
+  image: gcc:6
+  script:
+    - conan test_package --build=missing
+  tags:
+    - docker
+  artifacts:
+    paths:
+      - .conan/data/hello
 
-# build:clang-3.9:
-#   stage: build
-#   image: walberla/buildenv-ubuntu-clang:3.9
-#   script:
-#     - conan test_package --build=missing
-#   tags:
-#     - docker
-#   artifacts:
-#     paths:
-#       - .conan/data/hello
+build:clang-3.9:
+  stage: build
+  image: walberla/buildenv-ubuntu-clang:3.9
+  script:
+    - conan test_package --build=missing
+  tags:
+    - docker
+  artifacts:
+    paths:
+      - .conan/data/hello
 
 deploy:
   stage: deploy
@@ -64,18 +64,14 @@ deploy:
     - export CONAN_USER_HOME=$(pwd)
     - conan user
   script:
-    - ping -c 4 sprintbox.filonovpv.name
-    - pip install httpie
-    - http http://sprintbox.filonovpv.name:9300
-    - conan remote add conan-private http://185.185.69.25:9300
+    - conan remote add conan-private http://sprintbox.filonovpv.name:9300
     - conan user -p $CONAN_PASSWORD -r conan-private demo
-    - conan remote list
     - conan upload --confirm -r conan-private "hello/*" --all
   dependencies:
-    # - build:gcc-4
-    # - build:gcc-5
-    # - build:gcc-6
-    # - build:clang-3.9
+    - build:gcc-4
+    - build:gcc-5
+    - build:gcc-6
+    - build:clang-3.9
 
 # apple-clang-8.0:
 #   stage: build

@@ -1,8 +1,8 @@
-before_script:
-  - apt update && apt install -y cmake python-pip python-dev
-  - pip install conan
-  - export CONAN_USER_HOME=$(pwd)
-  - conan user
+# before_script:
+#   - apt update && apt install -y cmake python-pip python-dev
+#   - pip install conan
+#   - export CONAN_USER_HOME=$(pwd)
+#   - conan user
 
 stages:
   - build
@@ -64,7 +64,7 @@ deploy:
   #   - export CONAN_USER_HOME=$(pwd)
   #   - conan user
   script:
-    - nslookup sprintbox.filonovpv.name
+    - ping -c 4 sprintbox.filonovpv.name
     - pip install httpie
     - http http://sprintbox.filonovpv.name:9300
     # - conan remote add conan-private http://185.185.69.25:9300

@@ -11,8 +11,8 @@ class HelloConan(ConanFile):
     generators = "cmake"
 
     def build(self):
-        cmake = CMake(self.settings)
-        self.run('cmake "{}" {}'.format(self.conanfile_directory,
+        cmake = CMake(self)
+        self.run('cmake "{}" {}'.format(self.source_folder,
                                         cmake.command_line))
         self.run('cmake --build . {}'.format(cmake.build_config))
 
